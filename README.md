@@ -192,3 +192,8 @@ This requires:
 ```lua
 {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 ```
+
+### Personal notes
+
+ - for C/C++ debugging: download the vscode cpptools extension and put the extracted archive here, with name `vscode_cpptools_dbg_ext`. Also need to `chmod +x vscode_cpptools_dbg_ext/debugAdapters/bin/OpenDebugAD7`
+

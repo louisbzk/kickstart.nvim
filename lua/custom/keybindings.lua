@@ -3,3 +3,4 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Center cursor after moving dow
 vim.keymap.set('n', '<C-b>', '<C-b>zz', { desc = 'Center cursor after moving up full page' })
 vim.keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'Center cursor after moving down full page' })
 vim.keymap.set('n', "<leader>'", '`', { noremap = true, silent = true, desc = 'Remap backtick' })
+vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>', { desc = 'Open file browser' })
