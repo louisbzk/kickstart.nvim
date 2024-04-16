@@ -47,7 +47,7 @@ return {
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
     vim.keymap.set('n', '<F9>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F10>', dap.step_over, { desc = 'Debug: Step Over' })
-    vim.keymap.set('n', '<F11>', dap.step_out, { desc = 'Debug: Step Out' })
+    vim.keymap.set('n', '<F12>', dap.step_out, { desc = 'Debug: Step Out' })
     vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
@@ -81,12 +81,96 @@ return {
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- Install golang specific config
+    require('dap-go').setup()
+
+    -- configurations
     dap.adapters.cppdbg = {
       id = 'cppdbg',
       type = 'executable',
       command = '/home/louis.b-boulegue/.config/nvim/vscode_cpptools_dbg_ext/debugAdapters/bin/OpenDebugAD7',
     }
-    -- Install golang specific config
-    require('dap-go').setup()
+    dap.configurations.c = {
+      {
+        name = 'navlinux_file',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/sysnav-pr1093-navlinux',
+        cwd = '/home/louis.b-boulegue/repos/pr1093/preparation/',
+        stopOnEntry = false,
+        args = {
+          'ATR/navlinux_file.json',
+        },
+      },
+      {
+        name = 'test-navcore',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/test-navcore',
+        cwd = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/build',
+        stopOnEntry = false,
+        args = {
+          '../tests/test_modules/dependencies/config_test.json',
+        },
+      },
+      {
+        name = 'navlinux_file_uc',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/sysnav-pr1093-navlinux-uc',
+        cwd = '/home/louis.b-boulegue/repos/pr1093/preparation/',
+        stopOnEntry = false,
+        args = {
+          'ATR/navlinux_file_uc.json',
+        },
+      },
+    }
+
+    local dap_python = require 'dap-python'
+    dap_python.setup '~/.venvs/debugpy/bin/python'
+    dap_python.test_runner = 'pytest'
+    table.insert(dap.configurations.python, {
+      name = 'sysnav_pr1016_04_sysroad_simu.main',
+      type = 'debugpy',
+      request = 'launch',
+      program = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/sysnav_pr1016_04_navlinux_simu/main.py',
+      cwd = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/',
+      args = {
+        '../Files/config_simu.json',
+      },
+      justMyCode = false,
+    })
+    table.insert(dap.configurations.python, {
+      name = 'decode_simu',
+      type = 'debugpy',
+      request = 'launch',
+      program = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/sysnav_pr1016_04_navlinux_simu/nov_utils/decode_simu2.py',
+      cwd = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/',
+      args = {
+        '--to-navlinux',
+        '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/Output/new_unit_tests/data/5000m_left_to_navlinux.txt',
+        '--ref',
+        '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/Output/new_unit_tests/complete_traj/5000m_left.h5',
+        '--out-path',
+        '/home/louis.b-boulegue/repos/pr1016-01/navlinux/tests/test_modules/data_nav/',
+      },
+      justMyCode = false,
+    })
+    table.insert(dap.configurations.python, {
+      name = 'sysnav_pr1093_tracktician',
+      type = 'debugpy',
+      request = 'launch',
+      module = 'sysnav_pr1093_tracktician',
+      cwd = '/home/louis.b-boulegue/repos/pr1093/exploitation/tracktician/',
+      args = {
+        '--ref',
+        '/home/louis.b-boulegue/repos/pr1093/exploitation/tracktician/data/simulated_trajectories/complete_trajectory/5000m_straight.h5',
+        '--trajectories',
+        '/home/louis.b-boulegue/repos/pr1093/exploitation/tracktician/data/validation_process/test/complete_traj_b64/master/master_5000m_straight_complete_trajectory_b64.txt',
+        '--out-path',
+        '/tmp/tracktician_dbg',
+      },
+      justMyCode = false,
+    })
   end,
 }
