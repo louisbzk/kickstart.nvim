@@ -106,11 +106,11 @@ return {
         name = 'test-navcore',
         type = 'cppdbg',
         request = 'launch',
-        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/test-navcore',
-        cwd = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/build',
+        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/tests/test-navcore',
+        cwd = '/home/louis.b-boulegue/repos/pr1016-01/navlinux',
         stopOnEntry = false,
         args = {
-          '../tests/test_modules/dependencies/config_test.json',
+          'tests/test_modules/dependencies/config_test.json',
         },
       },
       {
@@ -123,6 +123,71 @@ return {
         args = {
           'ATR/navlinux_file_uc.json',
         },
+      },
+      {
+        name = 'navlinux_file_simu',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/sysnav-pr1093-navlinux',
+        cwd = '/home/louis.b-boulegue/repos/pr1093/preparation/',
+        stopOnEntry = false,
+        args = {
+          'ATR/navlinux_file_simu.json',
+        },
+      },
+      {
+        name = 'mimu_lbb',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/commonrestricted/mimu/tests/bin/lbb',
+        cwd = '/home/louis.b-boulegue/',
+        stopOnEntry = false,
+      },
+      {
+        name = 'fitPositionDR.test-constant-bias',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/tests/fitPositionDR/test-constant-bias',
+        cwd = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/',
+        stopOnEntry = false,
+      },
+    }
+    dap.configurations.cpp = {
+      {
+        name = 'microprocessing',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/pr1094/microprocessing/outputs/bin/amd64/sysnav-pr1094-microprocessing',
+        args = {
+          '--config',
+          '/home/louis.b-boulegue/repos/pr1093/preparation/ATR/microprocessing_config_central.json',
+          '--params',
+          '/home/louis.b-boulegue/repos/pr1093/preparation/ATR/microprocessing_m6.json',
+          '--file-in',
+          '/home/louis.b-boulegue/repos/pr1093/preparation/local_data/m6_raw/20241009/20241009_CAPT8B404E15CE02_01_log_raw.txt',
+          '--file-out',
+          '/dev/null',
+        },
+        cwd = '/home/louis.b-boulegue/repos/pr1094/microprocessing/',
+        stopOnEntry = false,
+      },
+      {
+        name = 'microprocessing_sort',
+        type = 'cppdbg',
+        request = 'launch',
+        program = '/home/louis.b-boulegue/repos/pr1094/microprocessing/outputs/bin/amd64/sysnav-pr1094-microprocessing',
+        args = {
+          '--config',
+          '/home/louis.b-boulegue/repos/pr1093/preparation/ATR/microprocessing_config_central.json',
+          '--params',
+          '/home/louis.b-boulegue/repos/pr1093/preparation/ATR/microprocessing_m6.json',
+          '--file-in',
+          '/home/louis.b-boulegue/repos/pr1093/preparation/local_data/m6_raw/20241009/20241009_CAPT8B404E15CE02_01_log_raw.txt',
+          '--file-out',
+          '/dev/null',
+        },
+        cwd = '/home/louis.b-boulegue/repos/pr1094/microprocessing/',
+        stopOnEntry = false,
       },
     }
 
@@ -171,6 +236,34 @@ return {
         '/tmp/tracktician_dbg',
       },
       justMyCode = false,
+    })
+    table.insert(dap.configurations.python, {
+      name = 'test_dev_5',
+      type = 'debugpy',
+      request = 'launch',
+      program = '/home/louis.b-boulegue/repos/test_dev_5/src/main.py',
+      args = {
+        '/home/louis.b-boulegue/repos/test_dev_5/grid1.txt',
+      },
+    })
+    table.insert(dap.configurations.python, {
+      name = 'sysnav_pr1093_analysis',
+      type = 'debugpy',
+      request = 'launch',
+      program = '/home/louis.b-boulegue/repos/pr1093/exploitation/analyses/run_analysis.py',
+      cwd = '/home/louis.b-boulegue/repos/pr1093/preparation',
+      args = {
+        '--input-files',
+        'local_data/preprocessed_replay/20240927/20240927_CAPT8B404E15CE02_02_log_preprocessed_replay_cut_begin.txt',
+        '--init-playback-files',
+        'none',
+        '--out-dir',
+        'local_data/analyses/20240927/check',
+        '--core-number',
+        '4',
+        '--no-carto',
+        '--nav-uc',
+      },
     })
   end,
 }

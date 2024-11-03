@@ -6,3 +6,6 @@ vim.keymap.set('n', "<leader>'", '`', { noremap = true, silent = true, desc = 'J
 vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>', { desc = 'Open file browser' })
 vim.keymap.set('n', '<leader>d<CR>', ':lua require("neogen").generate()<CR>', { desc = 'Generate [D]ocstring' })
 vim.keymap.set('n', '<F4>', ':let @+ = expand("%:p")<CR>', { desc = 'Copy full path of current buffer to clipboard' })
+vim.keymap.set('n', '<leader>nh', ':Gitsigns next_hunk<CR>', { desc = 'Gitsigns [N]ext_[H]unk' })
+vim.keymap.set('n', '<leader>ph', ':Gitsigns prev_hunk<CR>', { desc = 'Gitsigns [P]rev_[H]unk' })
+vim.keymap.set('n', '<leader>vh', ':Gitsigns preview_hunk<CR>', { desc = 'Gitsigns pre[V]iew [H]unk' })
