@@ -222,6 +222,13 @@ return {
       justMyCode = false,
     })
     table.insert(dap.configurations.python, {
+      name = 'toto',
+      type = 'debugpy',
+      request = 'launch',
+      program = '/home/louis.b-boulegue/repos/pr1093/exploitation/tracktician/tests/utils/test_toto.py',
+      justMyCode = false,
+    })
+    table.insert(dap.configurations.python, {
       name = 'sysnav_pr1093_tracktician',
       type = 'debugpy',
       request = 'launch',
