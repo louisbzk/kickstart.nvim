@@ -21,6 +21,7 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
     'mfussenegger/nvim-dap-python',
+    'nvim-neotest/nvim-nio',
   },
   config = function()
     local dap = require 'dap'
@@ -147,7 +148,8 @@ return {
         name = 'fitPositionDR.test-constant-bias',
         type = 'cppdbg',
         request = 'launch',
-        program = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/tests/fitPositionDR/test-constant-bias',
+        program =
+        '/home/louis.b-boulegue/repos/pr1016-01/navlinux/outputs/bin/amd64/tests/fitPositionDR/test-constant-bias',
         cwd = '/home/louis.b-boulegue/repos/pr1016-01/navlinux/',
         stopOnEntry = false,
       },
@@ -198,7 +200,8 @@ return {
       name = 'sysnav_pr1016_04_sysroad_simu.main',
       type = 'debugpy',
       request = 'launch',
-      program = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/sysnav_pr1016_04_navlinux_simu/main.py',
+      program =
+      '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/sysnav_pr1016_04_navlinux_simu/main.py',
       cwd = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/',
       args = {
         '../Files/config_simu.json',
@@ -209,7 +212,8 @@ return {
       name = 'decode_simu',
       type = 'debugpy',
       request = 'launch',
-      program = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/sysnav_pr1016_04_navlinux_simu/nov_utils/decode_simu2.py',
+      program =
+      '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/sysnav_pr1016_04_navlinux_simu/nov_utils/decode_simu2.py',
       cwd = '/home/louis.b-boulegue/repos/pr1016-04/navlinuxsimulations/sysnav_pr1016_04_sysroad_simu/',
       args = {
         '--to-navlinux',
