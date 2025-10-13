@@ -8,6 +8,10 @@ vim.keymap.set('n', ']d', function()
 end, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<C-Up>', ':resize +5<CR>', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-Down>', ':resize -5<CR>', { desc = 'Decrease window height' })
+vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { desc = 'Increase window width' })
+vim.keymap.set('n', '<C-Left>', ':vertical resize -5<CR>', { desc = 'Decrease window width' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
