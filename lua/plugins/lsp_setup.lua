@@ -54,7 +54,6 @@ return {
           c = { inlay_hints = { includeInlayParameterNameHints = 'all' } },
         },
       },
-      pyright = {},
       cmake = {},
       jsonls = {},
       lua_ls = {
@@ -71,6 +70,11 @@ return {
           },
         },
       },
+      -- python: ty for LSP & type checking, ruff for linting
+      ruff = { capabilities = { hoverProvider = false } },
+      ty = {},
+      -- dprint: disable dprint as LSP (only used as formatter)
+      dprint = { filetypes = { 'json' } },
     }
 
     require('mason').setup()
@@ -81,7 +85,7 @@ return {
 
     -- Setup handlers
     require('mason-lspconfig').setup {
-			automatic_enable = true,
+      automatic_enable = true,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
